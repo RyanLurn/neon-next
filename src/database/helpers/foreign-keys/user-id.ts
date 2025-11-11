@@ -4,6 +4,6 @@ import { userTable } from "@/database/schema/identity";
 
 const userIdForeignKey = uuid("user_id")
   .notNull()
-  .references(() => userTable.id);
+  .references(() => userTable.id, { onDelete: "cascade" });
 
 export { userIdForeignKey };

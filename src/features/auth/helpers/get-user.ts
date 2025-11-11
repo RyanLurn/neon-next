@@ -27,8 +27,6 @@ async function getUser(): Promise<
         location: "getUser",
       };
 
-      console.log(notAuthenticatedError);
-
       return err(notAuthenticatedError);
     }
 

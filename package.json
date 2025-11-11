@@ -13,7 +13,10 @@
     "type:gen": "next typegen",
     "type:check": "pnpm run type:gen && tsc --noEmit",
     "check": "turbo run type:check lint format:check",
-    "fix": "turbo run lint:fix format"
+    "fix": "turbo run lint:fix format",
+    "db:generate": "drizzle-kit generate --config ./src/database/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config ./src/database/drizzle.config.ts",
+    "db:check": "drizzle-kit check --config ./src/database/drizzle.config.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",

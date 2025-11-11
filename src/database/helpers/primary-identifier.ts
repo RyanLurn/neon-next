@@ -1,8 +1,8 @@
 import { uuid } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
-const primaryKey = uuid("id")
+const primaryIdentifier = uuid("id")
   .primaryKey()
   .default(sql`gen_random_uuid()`);
 
-export { primaryKey };
+export { primaryIdentifier };

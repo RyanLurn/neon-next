@@ -48,4 +48,15 @@ const accountTable = pgTable("accounts", {
   ...timestamps,
 });
 
-export { accountTable, sessionTable, userTable };
+const verificationTable = pgTable("verifications", {
+  id: primaryIdentifier,
+  identifier: text("identifier").notNull(),
+  value: text("value").notNull(),
+  expiresAt: timestamp("expires_at", {
+    mode: "date",
+    withTimezone: true,
+  }).notNull(),
+  ...timestamps,
+});
+
+export { verificationTable, accountTable, sessionTable, userTable };

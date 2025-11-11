@@ -1,4 +1,5 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
 import { betterAuth } from "better-auth";
 
 import {
@@ -24,6 +25,7 @@ const auth = betterAuth({
       generateId: false,
     },
   },
+  plugins: [nextCookies()], // make sure that nextCookies is the last plugin in the array
 });
 
 export { auth };

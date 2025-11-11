@@ -28,7 +28,7 @@ const sessionTable = pgTable(
     userAgent: text("user_agent"),
     ...timestamps,
   },
-  (table) => [index("user_id_idx").on(table.userId)]
+  (table) => [index("sessions_user_id_idx").on(table.userId)]
 );
 
 const accountTable = pgTable(
@@ -53,7 +53,7 @@ const accountTable = pgTable(
     password: text("password"),
     ...timestamps,
   },
-  (table) => [index("user_id_idx").on(table.userId)]
+  (table) => [index("accounts_user_id_idx").on(table.userId)]
 );
 
 const verificationTable = pgTable(
@@ -68,7 +68,7 @@ const verificationTable = pgTable(
     }).notNull(),
     ...timestamps,
   },
-  (table) => [index("identifier_idx").on(table.identifier)]
+  (table) => [index("verifications_identifier_idx").on(table.identifier)]
 );
 
 export { verificationTable, accountTable, sessionTable, userTable };

@@ -1,11 +1,12 @@
 /* eslint-disable perfectionist/sort-objects */
-import { timestamp, boolean, pgTable, text } from "drizzle-orm/pg-core";
+import { timestamp, boolean, text } from "drizzle-orm/pg-core";
 
 import { userIdForeignKey } from "@/database/helpers/foreign-keys/user-id";
 import { primaryIdentifier } from "@/database/helpers/primary-identifier";
 import { timestamps } from "@/database/helpers/timestamps";
+import { neonNextSchema } from "@/database/helpers/schema";
 
-const userTable = pgTable("users", {
+const userTable = neonNextSchema.table("users", {
   id: primaryIdentifier,
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -14,7 +15,7 @@ const userTable = pgTable("users", {
   ...timestamps,
 });
 
-const sessionTable = pgTable("sessions", {
+const sessionTable = neonNextSchema.table("sessions", {
   id: primaryIdentifier,
   userIdForeignKey,
   token: text("token").notNull().unique(),
@@ -27,7 +28,7 @@ const sessionTable = pgTable("sessions", {
   ...timestamps,
 });
 
-const accountTable = pgTable("accounts", {
+const accountTable = neonNextSchema.table("accounts", {
   id: primaryIdentifier,
   userIdForeignKey,
   accountId: text("account_id").notNull(),
@@ -48,7 +49,7 @@ const accountTable = pgTable("accounts", {
   ...timestamps,
 });
 
-const verificationTable = pgTable("verifications", {
+const verificationTable = neonNextSchema.table("verifications", {
   id: primaryIdentifier,
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),

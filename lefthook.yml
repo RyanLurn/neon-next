@@ -1,0 +1,17 @@
+pre-commit:
+  jobs:
+    - name: Format staged files
+      run: pnpm exec prettier {staged_files} --write --ignore-unknown --no-error-on-unmatched-pattern
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: Check types
+      run: pnpm run type:check
+
+    - name: Lint code
+      run: pnpm run lint
+
+    - name: Check format
+      run: pnpm run format:check

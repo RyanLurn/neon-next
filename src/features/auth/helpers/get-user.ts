@@ -32,7 +32,6 @@ async function getUser(): Promise<
 
     return ok(getSessionResult.user);
   } catch (error) {
-    const headersObject = Object.fromEntries(nextHeaders.entries());
     if (error instanceof APIError) {
       const authLibraryError: AuthLibraryError = {
         context: {
@@ -40,7 +39,6 @@ async function getUser(): Promise<
             message: error.message,
             status: error.status,
           },
-          headers: headersObject,
         },
         timestamp: new Date().toISOString(),
         message: "Something went wrong",
@@ -54,11 +52,10 @@ async function getUser(): Promise<
     }
 
     const unexpectedError: UnexpectedError = {
+      timestamp: new Date().toISOString(),
       context: {
-        headers: headersObject,
         error,
       },
-      timestamp: new Date().toISOString(),
       message: "Something went wrong",
       location: "getUser",
       kind: "unexpected",

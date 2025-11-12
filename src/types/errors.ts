@@ -14,13 +14,23 @@ interface AuthLibraryError extends BaseError {
   kind: "auth-library";
 }
 
+interface ZodValidationError extends BaseError {
+  kind: "validation";
+}
+
 interface UnexpectedError extends BaseError {
   kind: "unexpected";
 }
 
+interface ResendError extends BaseError {
+  kind: "resend";
+}
+
 export type {
   NotAuthenticatedError,
+  ZodValidationError,
   AuthLibraryError,
   UnexpectedError,
+  ResendError,
   BaseError,
 };

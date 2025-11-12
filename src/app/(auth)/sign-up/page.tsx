@@ -27,29 +27,27 @@ export default function SignUpPage() {
 
   return (
     <div className="flex size-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <Card>
-          <CardHeader>
-            <CardTitle>Create an account</CardTitle>
-            <CardDescription>
-              Enter your information below to sign up
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {serverError && (
-              <ErrorAlert
-                errorTitle="Unable to create your account"
-                errorMessage={serverError}
-                className="mb-6"
-              />
-            )}
-            <SignUpForm
-              showServerError={showServerError}
-              onFocus={clearServerError}
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Create an account</CardTitle>
+          <CardDescription>
+            Enter your information below to sign up
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {serverError && (
+            <ErrorAlert
+              errorTitle="Unable to create your account"
+              errorMessage={serverError}
+              className="mb-6"
             />
-          </CardContent>
-        </Card>
-      </div>
+          )}
+          <SignUpForm
+            showServerError={showServerError}
+            onFocus={clearServerError}
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 }

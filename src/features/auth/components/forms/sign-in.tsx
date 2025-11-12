@@ -88,6 +88,14 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
             }}
             name="password"
           />
+          <Field>
+            <Link
+              className="text-sm underline-offset-4 hover:underline"
+              href="/forgot-password"
+            >
+              Forgot your password? Click here to reset.
+            </Link>
+          </Field>
         </FieldGroup>
         <FieldGroup>
           <signInForm.AppForm>

@@ -31,6 +31,8 @@ async function sendDevelopmentEmail(
       kind: "unexpected",
     };
 
+    console.error(etherealError);
+
     return err(etherealError);
   }
 }

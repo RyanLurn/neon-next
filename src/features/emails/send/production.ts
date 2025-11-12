@@ -27,6 +27,8 @@ async function sendProductionEmail(
       kind: "resend",
     };
 
+    console.error(resendError);
+
     return err(resendError);
   }
 

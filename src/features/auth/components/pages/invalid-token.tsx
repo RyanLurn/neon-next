@@ -55,8 +55,7 @@ function InvalidTokenPage() {
             </li>
             <li>
               If you have seen this page multiple times, please contact support
-              at
-              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+              at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
             </li>
           </ul>
         </div>

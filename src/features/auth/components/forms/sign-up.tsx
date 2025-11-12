@@ -1,7 +1,7 @@
 import type { ComponentProps, FormEvent } from "react";
-import type { Route } from "next";
 
 import { useStore } from "@tanstack/react-form";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { PasswordConfirmFieldGroup } from "@/features/auth/components/password-confirm-field-group";
@@ -15,13 +15,23 @@ import { emailValidator, nameValidator } from "@/features/auth/validators";
 import { useAppForm } from "@/components/form/hook";
 import { authClient } from "@/features/auth/client";
 
-function SignUpForm(properties: ComponentProps<"form">) {
+interface SignUpFormProperties extends ComponentProps<"form"> {
+  showServerError: (errorMessage: string) => void;
+}
+
+function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
+  const router = useRouter();
   const signUpForm = useAppForm({
     onSubmit: async ({ value }) => {
-      await authClient.signUp.email({
+      const { error } = await authClient.signUp.email({
         ...value,
-        callbackURL: "/protected" as Route,
       });
+
+      if (error) {
+        showServerError(error.message ?? "Something went wrong.");
+      }
+
+      router.push("/protected");
     },
     defaultValues: {
       confirmPassword: "",
@@ -62,7 +72,6 @@ function SignUpForm(properties: ComponentProps<"form">) {
           <signUpForm.AppField
             children={(field) => (
               <field.FormTextInputField
-                description="We'll use this to contact you. We will not share your email with anyone else."
                 placeholder="example@gmail.com"
                 disabled={isSubmitting}
                 label="Email"

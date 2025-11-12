@@ -13,7 +13,6 @@ const PasswordConfirmFieldGroup = withFieldGroup({
         <group.AppField
           children={(field) => (
             <field.FormTextInputField
-              description="Must be at least 8 characters long."
               label={passwordLabel}
               disabled={disabled}
               type="password"
@@ -39,7 +38,6 @@ const PasswordConfirmFieldGroup = withFieldGroup({
           }}
           children={(field) => (
             <field.FormTextInputField
-              description="Please confirm your password."
               label={confirmPasswordLabel}
               disabled={disabled}
               type="password"

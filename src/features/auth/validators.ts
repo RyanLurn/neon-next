@@ -10,4 +10,14 @@ const passwordValidator = z
   .string()
   .min(8, "Password must be at least 8 characters long");
 
-export { passwordValidator, emailValidator, nameValidator };
+const newPasswordPageSearchParametersValidator = z.union([
+  z.object({ error: z.string() }),
+  z.object({ token: z.string() }),
+]);
+
+export {
+  newPasswordPageSearchParametersValidator,
+  passwordValidator,
+  emailValidator,
+  nameValidator,
+};

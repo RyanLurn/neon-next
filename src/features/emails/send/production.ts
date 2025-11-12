@@ -1,3 +1,6 @@
+import type { CreateEmailResponseSuccess } from "resend";
+import type { Result } from "neverthrow";
+
 import { err, ok } from "neverthrow";
 import { Resend } from "resend";
 
@@ -6,7 +9,9 @@ import type { ResendError } from "@/types/errors";
 
 import { serverEnvironmentVariables } from "@/lib/env/server";
 
-async function sendProductionEmail(email: EmailType) {
+async function sendProductionEmail(
+  email: EmailType
+): Promise<Result<CreateEmailResponseSuccess, ResendError>> {
   const resend = new Resend(serverEnvironmentVariables.RESEND_API_KEY);
 
   const { error, data } = await resend.emails.send(email);

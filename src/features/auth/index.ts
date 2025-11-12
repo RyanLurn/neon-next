@@ -12,6 +12,7 @@ import {
   userTable,
 } from "@/database/schema/identity";
 import { serverEnvironmentVariables } from "@/lib/env/server";
+import { SUPPORT_EMAIL } from "@/features/emails/constants";
 import { sendEmail } from "@/features/emails/send";
 import { database } from "@/database/connection";
 
@@ -27,7 +28,7 @@ const auth = betterAuth({
         html: `<p>Please click this link to reset your password: <a href="${url}" target="_blank">${url}</a></p>`,
         text: `Please click this link to reset your password: ${url}`,
         subject: "Reset your password",
-        from: "support@neonnext.com",
+        from: SUPPORT_EMAIL,
         to: user.email,
       };
       const sendEmailResult = await sendEmail(resetPasswordEmail);
@@ -46,7 +47,7 @@ const auth = betterAuth({
         html: `<p>Please click this link to verify your email: <a href="${url}" target="_blank">${url}</a></p>`,
         text: `Please click this link to verify your email: ${url}`,
         subject: "Verify your email address",
-        from: "support@neonnext.com",
+        from: SUPPORT_EMAIL,
         to: user.email,
       };
       const sendEmailResult = await sendEmail(verificationEmail);

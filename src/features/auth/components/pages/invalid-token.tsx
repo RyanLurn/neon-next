@@ -9,6 +9,7 @@ import {
   EmptyTitle,
   Empty,
 } from "@/components/ui/empty";
+import { SUPPORT_EMAIL } from "@/features/emails/constants";
 import { Button } from "@/components/ui/button";
 
 function InvalidTokenPage() {
@@ -55,7 +56,7 @@ function InvalidTokenPage() {
             <li>
               If you have seen this page multiple times, please contact support
               at
-              <a href="mailto:support@neonnext.com">support@neonnext.com</a>.
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
             </li>
           </ul>
         </div>

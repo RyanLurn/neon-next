@@ -30,6 +30,7 @@ const auth = betterAuth({
         throw new Error(sendEmailResult.error.message);
       }
     },
+    autoSignInAfterVerification: true,
     sendOnSignUp: true,
     sendOnSignIn: true,
   },

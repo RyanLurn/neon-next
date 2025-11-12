@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { ZodValidationError } from "@/types/errors";
 
 import { newPasswordPageSearchParametersValidator } from "@/features/auth/validators";
-import { InvalidTokenPage } from "@/features/auth/components/invalid-token-page";
+import { InvalidTokenPage } from "@/features/auth/components/pages/invalid-token";
 import { cn } from "@/lib/utilities";
 
 export default async function NewPasswordPage({

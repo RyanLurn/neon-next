@@ -7,7 +7,7 @@ function ResendInstructions() {
         Cannot find the verification email we sent you?
       </p>
       <p className="leading-7">Please follow these steps:</p>
-      <ol className="mb-2 ml-6 list-disc">
+      <ol className="mb-2 ml-6 list-decimal">
         <li>Check your spam/junk folder</li>
         <li>
           If you still cannot find it, click the button below. We'll send you a

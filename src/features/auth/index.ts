@@ -1,4 +1,5 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { haveIBeenPwned } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
 import { betterAuth } from "better-auth";
 
@@ -13,6 +14,11 @@ import {
 import { serverEnvironmentVariables } from "@/lib/env/server";
 import { sendEmail } from "@/features/emails/send";
 import { database } from "@/database/connection";
+
+const haveIBeenPwnedPlugin = haveIBeenPwned({
+  customPasswordCompromisedMessage:
+    "Your chosen password has been found in a data breach. Please choose a more secure password.",
+});
 
 const auth = betterAuth({
   emailVerification: {
@@ -54,7 +60,7 @@ const auth = betterAuth({
   },
   secret: serverEnvironmentVariables.BETTER_AUTH_SECRET,
   baseURL: serverEnvironmentVariables.BETTER_AUTH_URL,
-  plugins: [nextCookies()], // make sure that nextCookies is the last plugin in the array
+  plugins: [haveIBeenPwnedPlugin, nextCookies()], // make sure that nextCookies is the last plugin in the array
 });
 
 export { auth };

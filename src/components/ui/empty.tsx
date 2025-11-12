@@ -47,7 +47,7 @@ const emptyMediaVariants = cva(
 
 function EmptyDescription({ className, ...properties }: ComponentProps<"p">) {
   return (
-    <div
+    <p
       className={cn(
         "text-sm/relaxed text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className

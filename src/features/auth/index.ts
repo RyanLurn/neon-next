@@ -21,7 +21,7 @@ const auth = betterAuth({
         html: `<p>Please click this link to verify your email: <a href="${url}" target="_blank">${url}</a></p>`,
         text: `Please click this link to verify your email: ${url}`,
         subject: "Verify your email address",
-        from: "support@neonrain.com",
+        from: "support@neonnext.com",
         to: user.email,
       };
       const sendEmailResult = await sendEmail(verificationEmail);

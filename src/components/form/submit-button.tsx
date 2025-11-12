@@ -12,8 +12,13 @@ function FormSubmitButton({
   const form = useFormContext();
 
   return (
-    <form.Subscribe<{ isSubmitting: boolean; canSubmit: boolean }>
-      children={({ isSubmitting, canSubmit }) => (
+    <form.Subscribe
+      selector={(state) => ({
+        isSubmitting: state.isSubmitting,
+        canSubmit: state.canSubmit,
+      })}
+    >
+      {({ isSubmitting, canSubmit }) => (
         <Button
           aria-disabled={!canSubmit || isSubmitting}
           disabled={!canSubmit || isSubmitting}
@@ -29,11 +34,7 @@ function FormSubmitButton({
           )}
         </Button>
       )}
-      selector={(state) => ({
-        isSubmitting: state.isSubmitting,
-        canSubmit: state.canSubmit,
-      })}
-    />
+    </form.Subscribe>
   );
 }
 

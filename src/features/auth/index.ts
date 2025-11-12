@@ -31,6 +31,7 @@ const auth = betterAuth({
       }
     },
     sendOnSignUp: true,
+    sendOnSignIn: true,
   },
   database: drizzleAdapter(database, {
     schema: {
@@ -41,6 +42,10 @@ const auth = betterAuth({
     },
     provider: "pg",
   }),
+  emailAndPassword: {
+    requireEmailVerification: true,
+    enabled: true,
+  },
   advanced: {
     database: {
       generateId: false,
@@ -48,9 +53,6 @@ const auth = betterAuth({
   },
   secret: serverEnvironmentVariables.BETTER_AUTH_SECRET,
   baseURL: serverEnvironmentVariables.BETTER_AUTH_URL,
-  emailAndPassword: {
-    enabled: true,
-  },
   plugins: [nextCookies()], // make sure that nextCookies is the last plugin in the array
 });
 

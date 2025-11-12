@@ -40,6 +40,21 @@ const auth = betterAuth({
     sendOnSignUp: true,
     sendOnSignIn: true,
   },
+  emailAndPassword: {
+    sendResetPassword: async ({ user, url }) => {
+      const resetPasswordEmail: EmailType = {
+        html: `<p>Please click this link to reset your password: <a href="${url}" target="_blank">${url}</a></p>`,
+        text: `Please click this link to reset your password: ${url}`,
+        subject: "Reset your password",
+        from: "support@neonnext.com",
+        to: user.email,
+      };
+      await sendEmail(resetPasswordEmail);
+    },
+    revokeSessionsOnPasswordReset: true,
+    requireEmailVerification: true,
+    enabled: true,
+  },
   database: drizzleAdapter(database, {
     schema: {
       verification: verificationTable,
@@ -49,10 +64,6 @@ const auth = betterAuth({
     },
     provider: "pg",
   }),
-  emailAndPassword: {
-    requireEmailVerification: true,
-    enabled: true,
-  },
   advanced: {
     database: {
       generateId: false,

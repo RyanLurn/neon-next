@@ -4,9 +4,9 @@ import type { ZodValidationError } from "@/types/errors";
 
 import { newPasswordPageSearchParametersValidator } from "@/features/auth/validators";
 import { InvalidTokenPage } from "@/features/auth/components/pages/invalid-token";
-import { cn } from "@/lib/utilities";
+import { NewPasswordPage } from "@/features/auth/components/pages/new-password";
 
-export default async function NewPasswordPage({
+export default async function NewPassword({
   searchParams,
 }: PageProps<"/new-password">) {
   const searchParametersObject = await searchParams;
@@ -33,20 +33,9 @@ export default async function NewPasswordPage({
 
   const token = "token" in result.data ? result.data.token : undefined;
 
-  return (
-    <div
-      className={cn(
-        "size-full",
-        token && "flex items-center justify-center p-6 md:p-10"
-      )}
-    >
-      {token ? (
-        <div className="w-full max-w-sm">
-          {/* <NewPasswordForm token={token} /> */}
-        </div>
-      ) : (
-        <InvalidTokenPage />
-      )}
-    </div>
-  );
+  if (!token) {
+    return <InvalidTokenPage />;
+  }
+
+  return <NewPasswordPage token={token} />;
 }

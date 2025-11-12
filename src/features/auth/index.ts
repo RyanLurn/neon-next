@@ -30,6 +30,7 @@ const auth = betterAuth({
         throw new Error(sendEmailResult.error.message);
       }
     },
+    sendOnSignUp: true,
   },
   database: drizzleAdapter(database, {
     schema: {

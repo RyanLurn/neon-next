@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { ZodValidationError } from "@/types/errors";
 
 import { newPasswordPageSearchParametersValidator } from "@/features/auth/validators";
+import { InvalidTokenPage } from "@/features/auth/components/invalid-token-page";
 import { cn } from "@/lib/utilities";
 
 export default async function NewPasswordPage({
@@ -44,8 +45,7 @@ export default async function NewPasswordPage({
           {/* <NewPasswordForm token={token} /> */}
         </div>
       ) : (
-        // <InvalidToken />
-        <p>Invalid token</p>
+        <InvalidTokenPage />
       )}
     </div>
   );

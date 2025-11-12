@@ -32,7 +32,9 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
       if (error) {
         showServerError(error.message ?? "Something went wrong.");
       } else {
-        router.push("/sign-up/verify-email");
+        router.push(
+          `/sign-up/verify-email?email=${encodeURIComponent(value.email)}`
+        );
       }
     },
     defaultValues: {

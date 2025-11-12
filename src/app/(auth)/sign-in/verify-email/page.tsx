@@ -1,3 +1,5 @@
+import { ResendInstructions } from "@/features/auth/components/verification/resend-instructions";
+
 export default function AfterSignInVerifyEmailPage() {
   return (
     <div className="flex size-full flex-col items-center justify-center gap-y-6">
@@ -12,6 +14,7 @@ export default function AfterSignInVerifyEmailPage() {
           Please check your email for a verification link.
         </p>
       </div>
+      <ResendInstructions />
     </div>
   );
 }

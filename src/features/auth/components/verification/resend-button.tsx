@@ -54,7 +54,7 @@ function ResendButton() {
     <Button
       onClick={() => void resendVerificationLink()}
       disabled={isPending || cooldown > 0}
-      className="self-center"
+      className="w-3xs self-center"
     >
       {isPending ? (
         <>

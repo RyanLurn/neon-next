@@ -30,7 +30,9 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
 
       if (error) {
         if (error.status === 403) {
-          router.push("/sign-in/verify-email");
+          router.push(
+            `/sign-in/verify-email?email=${encodeURIComponent(value.email)}`
+          );
         } else {
           showServerError(error.message ?? "Something went wrong.");
         }

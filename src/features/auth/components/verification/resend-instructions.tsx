@@ -2,7 +2,7 @@ import { ResendButton } from "@/features/auth/components/verification/resend-but
 
 function ResendInstructions() {
   return (
-    <div className="mt-4 flex flex-col gap-y-3">
+    <div className="mt-4 flex max-w-sm flex-col gap-y-3">
       <p className="text-lg font-semibold">
         Cannot find the verification email we sent you?
       </p>

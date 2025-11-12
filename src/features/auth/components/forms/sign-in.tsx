@@ -28,9 +28,9 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
 
       if (error) {
         showServerError(error.message ?? "Something went wrong.");
+      } else {
+        router.push("/protected");
       }
-
-      router.push("/protected");
     },
     defaultValues: {
       password: "",

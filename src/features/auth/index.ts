@@ -21,6 +21,25 @@ const haveIBeenPwnedPlugin = haveIBeenPwned({
 });
 
 const auth = betterAuth({
+  emailAndPassword: {
+    sendResetPassword: async ({ user, url }) => {
+      const resetPasswordEmail: EmailType = {
+        html: `<p>Please click this link to reset your password: <a href="${url}" target="_blank">${url}</a></p>`,
+        text: `Please click this link to reset your password: ${url}`,
+        subject: "Reset your password",
+        from: "support@neonnext.com",
+        to: user.email,
+      };
+      const sendEmailResult = await sendEmail(resetPasswordEmail);
+
+      if (sendEmailResult.isErr()) {
+        throw new Error(sendEmailResult.error.message);
+      }
+    },
+    revokeSessionsOnPasswordReset: true,
+    requireEmailVerification: true,
+    enabled: true,
+  },
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       const verificationEmail: EmailType = {
@@ -39,21 +58,6 @@ const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendOnSignUp: true,
     sendOnSignIn: true,
-  },
-  emailAndPassword: {
-    sendResetPassword: async ({ user, url }) => {
-      const resetPasswordEmail: EmailType = {
-        html: `<p>Please click this link to reset your password: <a href="${url}" target="_blank">${url}</a></p>`,
-        text: `Please click this link to reset your password: ${url}`,
-        subject: "Reset your password",
-        from: "support@neonnext.com",
-        to: user.email,
-      };
-      await sendEmail(resetPasswordEmail);
-    },
-    revokeSessionsOnPasswordReset: true,
-    requireEmailVerification: true,
-    enabled: true,
   },
   database: drizzleAdapter(database, {
     schema: {

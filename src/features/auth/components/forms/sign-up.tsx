@@ -1,4 +1,5 @@
 import type { ComponentProps, FormEvent } from "react";
+import type { Route } from "next";
 
 import { useStore } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
@@ -25,12 +26,13 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
     onSubmit: async ({ value }) => {
       const { error } = await authClient.signUp.email({
         ...value,
+        callbackURL: "/protected" as Route,
       });
 
       if (error) {
         showServerError(error.message ?? "Something went wrong.");
       } else {
-        router.push("/protected");
+        router.push("/sign-up/verify-email");
       }
     },
     defaultValues: {

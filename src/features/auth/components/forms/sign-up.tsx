@@ -26,7 +26,7 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
     onSubmit: async ({ value }) => {
       const { error } = await authClient.signUp.email({
         ...value,
-        callbackURL: "/protected" as Route,
+        callbackURL: "/protected" as Route, // redirect url after email verification
       });
 
       if (error) {

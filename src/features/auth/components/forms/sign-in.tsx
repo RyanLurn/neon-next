@@ -27,6 +27,9 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
       });
 
       if (error) {
+        if (error.status === 403) {
+          router.push("/sign-in/verify-email");
+        }
         showServerError(error.message ?? "Something went wrong.");
       } else {
         router.push("/protected");

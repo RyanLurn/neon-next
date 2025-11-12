@@ -18,9 +18,14 @@ interface UnexpectedError extends BaseError {
   kind: "unexpected";
 }
 
+interface ResendError extends BaseError {
+  kind: "resend";
+}
+
 export type {
   NotAuthenticatedError,
   AuthLibraryError,
   UnexpectedError,
+  ResendError,
   BaseError,
 };

@@ -14,10 +14,10 @@ function ContinueWithEmail({
 }: ContinueWithEmailProperties) {
   return (
     <Button
-      variant="outline"
-      {...properties}
       onClick={showEmailForm}
+      variant="outline"
       type="button"
+      {...properties}
     >
       <Mail />
       <span>Continue with Email</span>

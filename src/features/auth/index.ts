@@ -101,6 +101,9 @@ const auth = betterAuth({
   },
   secret: serverEnvironmentVariables.BETTER_AUTH_SECRET,
   baseURL: serverEnvironmentVariables.BETTER_AUTH_URL,
+  rateLimit: {
+    storage: "secondary-storage",
+  },
   plugins: [haveIBeenPwnedPlugin, nextCookies()], // make sure that nextCookies is the last plugin in the array
 });
 

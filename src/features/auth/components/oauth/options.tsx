@@ -4,20 +4,30 @@ import { Field } from "@/components/ui/field";
 
 function OAuthOptions({
   showServerError,
+  isOAuthPending,
   isSubmitting,
+  finishOAuth,
+  startOAuth,
 }: {
   showServerError: (errorMessage: string) => void;
+  finishOAuth: () => void;
+  isOAuthPending: boolean;
+  startOAuth: () => void;
   isSubmitting: boolean;
 }) {
   return (
     <Field>
       <ContinueWithGoogle
+        disabled={isSubmitting || isOAuthPending}
         showServerError={showServerError}
-        disabled={isSubmitting}
+        finishOAuth={finishOAuth}
+        startOAuth={startOAuth}
       />
       <ContinueWithGithub
+        disabled={isSubmitting || isOAuthPending}
         showServerError={showServerError}
-        disabled={isSubmitting}
+        finishOAuth={finishOAuth}
+        startOAuth={startOAuth}
       />
     </Field>
   );

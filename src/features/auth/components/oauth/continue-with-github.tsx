@@ -7,14 +7,20 @@ import { Button } from "@/components/ui/button";
 
 interface ContinueWithGithubProperties extends ComponentProps<typeof Button> {
   showServerError: (errorMessage: string) => void;
+  finishOAuth: () => void;
+  startOAuth: () => void;
 }
 
 function ContinueWithGithub({
   variant = "outline",
   showServerError,
+  finishOAuth,
+  startOAuth,
   ...properties
 }: ContinueWithGithubProperties) {
   async function handleClick() {
+    startOAuth();
+
     const { error } = await authClient.signIn.social({
       errorCallbackURL: "/oauth-error" as Route,
       callbackURL: "/protected" as Route,
@@ -23,6 +29,7 @@ function ContinueWithGithub({
 
     if (error) {
       showServerError(error.message ?? "Something went wrong.");
+      finishOAuth();
     }
   }
 

@@ -7,14 +7,20 @@ import { Button } from "@/components/ui/button";
 
 interface ContinueWithGoogleProperties extends ComponentProps<typeof Button> {
   showServerError: (errorMessage: string) => void;
+  finishOAuth: () => void;
+  startOAuth: () => void;
 }
 
 function ContinueWithGoogle({
   variant = "default",
   showServerError,
+  finishOAuth,
+  startOAuth,
   ...properties
 }: ContinueWithGoogleProperties) {
   async function handleClick() {
+    startOAuth();
+
     const { error } = await authClient.signIn.social({
       errorCallbackURL: "/oauth-error" as Route,
       callbackURL: "/protected" as Route,
@@ -23,6 +29,7 @@ function ContinueWithGoogle({
 
     if (error) {
       showServerError(error.message ?? "Something went wrong.");
+      finishOAuth();
     }
   }
 

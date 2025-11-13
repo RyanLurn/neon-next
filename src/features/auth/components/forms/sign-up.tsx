@@ -1,6 +1,6 @@
 import type { Route } from "next";
 
-import { type ComponentProps, type FormEvent, Activity } from "react";
+import { type ComponentProps, type FormEvent, Activity, useState } from "react";
 import { useStore } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -36,6 +36,7 @@ function SignUpForm({
   ...properties
 }: SignUpFormProperties) {
   const router = useRouter();
+  const [isOAuthPending, setIsOAuthPending] = useState(false);
 
   const signUpForm = useAppForm({
     onSubmit: async ({ value }) => {
@@ -65,6 +66,14 @@ function SignUpForm({
     (state) => state.isSubmitting
   );
 
+  function startOAuth() {
+    setIsOAuthPending(true);
+  }
+
+  function finishOAuth() {
+    setIsOAuthPending(false);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     await signUpForm.handleSubmit();
@@ -76,13 +85,19 @@ function SignUpForm({
         <Activity mode={view === "social" ? "visible" : "hidden"}>
           <OAuthOptions
             showServerError={showServerError}
+            isOAuthPending={isOAuthPending}
             isSubmitting={isSubmitting}
+            finishOAuth={finishOAuth}
+            startOAuth={startOAuth}
           />
           <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
             Or
           </FieldSeparator>
           <Field>
-            <ContinueWithEmail showEmailForm={showEmailForm} />
+            <ContinueWithEmail
+              showEmailForm={showEmailForm}
+              disabled={isOAuthPending}
+            />
           </Field>
         </Activity>
         <Activity mode={view === "email" ? "visible" : "hidden"}>

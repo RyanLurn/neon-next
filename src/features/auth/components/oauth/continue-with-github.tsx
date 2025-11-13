@@ -16,6 +16,7 @@ function ContinueWithGithub({
 }: ContinueWithGithubProperties) {
   async function handleClick() {
     const { error } = await authClient.signIn.social({
+      errorCallbackURL: "/oauth-error" as Route,
       callbackURL: "/protected" as Route,
       provider: "github",
     });

@@ -26,11 +26,16 @@ interface ResendError extends BaseError {
   kind: "resend";
 }
 
+interface OAuthError extends BaseError {
+  kind: "oauth";
+}
+
 export type {
   NotAuthenticatedError,
   ZodValidationError,
   AuthLibraryError,
   UnexpectedError,
   ResendError,
+  OAuthError,
   BaseError,
 };

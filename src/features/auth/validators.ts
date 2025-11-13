@@ -15,9 +15,12 @@ const newPasswordPageSearchParametersValidator = z.union([
   z.object({ token: z.string() }),
 ]);
 
+const oauthErrorSchema = z.object({ error: z.string() });
+
 export {
   newPasswordPageSearchParametersValidator,
   passwordValidator,
+  oauthErrorSchema,
   emailValidator,
   nameValidator,
 };

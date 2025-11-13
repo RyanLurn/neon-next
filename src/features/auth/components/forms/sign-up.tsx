@@ -80,7 +80,7 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
             isSubmitting={isSubmitting}
           />
           <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-            Or continue with
+            Or
           </FieldSeparator>
           <Field>
             <ContinueWithEmail showEmailForm={showEmailForm} />

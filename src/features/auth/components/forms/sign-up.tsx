@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/field";
 import { PasswordConfirmFieldGroup } from "@/features/auth/components/password-confirm-field-group";
 import { ContinueWithGithub } from "@/features/auth/components/oauth/continue-with-github";
+import { ContinueWithGoogle } from "@/features/auth/components/oauth/continue-with-google";
 import { emailValidator, nameValidator } from "@/features/auth/validators";
 import { useAppForm } from "@/components/form/hook";
 import { authClient } from "@/features/auth/client";
@@ -60,6 +61,12 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
     <form {...properties} onSubmit={(event) => void handleSubmit(event)}>
       <FieldSet>
         <FieldGroup>
+          <Field>
+            <ContinueWithGoogle
+              showServerError={showServerError}
+              disabled={isSubmitting}
+            />
+          </Field>
           <Field>
             <ContinueWithGithub
               showServerError={showServerError}

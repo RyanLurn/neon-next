@@ -13,6 +13,7 @@ import {
   Field,
 } from "@/components/ui/field";
 import { ContinueWithGithub } from "@/features/auth/components/oauth/continue-with-github";
+import { ContinueWithGoogle } from "@/features/auth/components/oauth/continue-with-google";
 import { passwordValidator, emailValidator } from "@/features/auth/validators";
 import { useAppForm } from "@/components/form/hook";
 import { authClient } from "@/features/auth/client";
@@ -61,6 +62,12 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
     <form {...properties} onSubmit={(event) => void handleSubmit(event)}>
       <FieldSet>
         <FieldGroup>
+          <Field>
+            <ContinueWithGoogle
+              showServerError={showServerError}
+              disabled={isSubmitting}
+            />
+          </Field>
           <Field>
             <ContinueWithGithub
               showServerError={showServerError}

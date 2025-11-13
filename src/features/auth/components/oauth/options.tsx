@@ -1,5 +1,4 @@
-import { ContinueWithGithub } from "@/features/auth/components/oauth/continue-with-github";
-import { ContinueWithGoogle } from "@/features/auth/components/oauth/continue-with-google";
+import { OAuthButton } from "@/features/auth/components/oauth/button";
 import { Field } from "@/components/ui/field";
 
 function OAuthOptions({
@@ -17,17 +16,21 @@ function OAuthOptions({
 }) {
   return (
     <Field>
-      <ContinueWithGoogle
+      <OAuthButton
         disabled={isSubmitting || isOAuthPending}
         showServerError={showServerError}
         finishOAuth={finishOAuth}
         startOAuth={startOAuth}
+        provider="google"
+        variant="default"
       />
-      <ContinueWithGithub
+      <OAuthButton
         disabled={isSubmitting || isOAuthPending}
         showServerError={showServerError}
         finishOAuth={finishOAuth}
         startOAuth={startOAuth}
+        variant="secondary"
+        provider="github"
       />
     </Field>
   );

@@ -2,29 +2,32 @@ import type { ComponentProps } from "react";
 import type { Route } from "next";
 
 import { GitHubLogo } from "@/features/auth/components/oauth/logos/github";
+import { GoogleLogo } from "@/features/auth/components/oauth/logos/google";
 import { authClient } from "@/features/auth/client";
 import { Button } from "@/components/ui/button";
 
-interface ContinueWithGithubProperties extends ComponentProps<typeof Button> {
+interface OAuthButtonProperties extends ComponentProps<typeof Button> {
   showServerError: (errorMessage: string) => void;
+  provider: "github" | "google";
   finishOAuth: () => void;
   startOAuth: () => void;
 }
 
-function ContinueWithGithub({
-  variant = "outline",
+function OAuthButton({
   showServerError,
   finishOAuth,
   startOAuth,
+  provider,
+  variant,
   ...properties
-}: ContinueWithGithubProperties) {
+}: OAuthButtonProperties) {
   async function handleClick() {
     startOAuth();
 
     const { error } = await authClient.signIn.social({
       errorCallbackURL: "/oauth-error" as Route,
       callbackURL: "/protected" as Route,
-      provider: "github",
+      provider,
     });
 
     if (error) {
@@ -32,18 +35,17 @@ function ContinueWithGithub({
       finishOAuth();
     }
   }
-
   return (
     <Button
-      variant={variant}
-      {...properties}
       onClick={() => void handleClick()}
+      variant={variant}
       type="button"
+      {...properties}
     >
-      <GitHubLogo />
-      <span>Continue with GitHub</span>
+      {provider === "github" ? <GitHubLogo /> : <GoogleLogo />}
+      <span>Continue with {provider === "github" ? "GitHub" : "Google"}</span>
     </Button>
   );
 }
 
-export { ContinueWithGithub };
+export { OAuthButton };

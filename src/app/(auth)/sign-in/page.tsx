@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-import { CardContent, CardHeader, CardTitle, Card } from "@/components/ui/card";
+import {
+  CardDescription,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Card,
+} from "@/components/ui/card";
 import { SignInForm } from "@/features/auth/components/forms/sign-in";
 import { ErrorAlert } from "@/components/utilities/error-alert";
 
@@ -22,8 +28,11 @@ export default function SignInPage() {
   return (
     <div className="flex size-full items-center justify-center p-6 md:p-10">
       <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-center">Sign In</CardTitle>
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Welcome back</CardTitle>
+          <CardDescription>
+            Sign in with your Google or GitHub account
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {serverError && (

@@ -28,10 +28,10 @@ export default function SignInPage() {
   return (
     <div className="flex size-full items-center justify-center p-6 md:p-10">
       <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Sign In</CardTitle>
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Welcome back</CardTitle>
           <CardDescription>
-            Enter your credentials below to sign in
+            Sign in with your Google or GitHub account
           </CardDescription>
         </CardHeader>
         <CardContent>

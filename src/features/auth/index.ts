@@ -60,6 +60,16 @@ const auth = betterAuth({
     sendOnSignUp: true,
     sendOnSignIn: true,
   },
+  socialProviders: {
+    github: {
+      clientSecret: serverEnvironmentVariables.GITHUB_CLIENT_SECRET,
+      clientId: serverEnvironmentVariables.GITHUB_CLIENT_ID,
+    },
+    google: {
+      clientSecret: serverEnvironmentVariables.GOOGLE_CLIENT_SECRET,
+      clientId: serverEnvironmentVariables.GOOGLE_CLIENT_ID,
+    },
+  },
   database: drizzleAdapter(database, {
     schema: {
       verification: verificationTable,

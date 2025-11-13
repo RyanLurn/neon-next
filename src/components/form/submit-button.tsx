@@ -3,10 +3,12 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 
 function FormSubmitButton({
+  customDisabled,
   submittingText,
   text,
 }: {
-  submittingText?: string;
+  customDisabled?: boolean;
+  submittingText: string;
   text: string;
 }) {
   const form = useFormContext();
@@ -20,8 +22,8 @@ function FormSubmitButton({
     >
       {({ isSubmitting, canSubmit }) => (
         <Button
-          aria-disabled={!canSubmit || isSubmitting}
-          disabled={!canSubmit || isSubmitting}
+          aria-disabled={customDisabled || !canSubmit || isSubmitting}
+          disabled={customDisabled || !canSubmit || isSubmitting}
           type="submit"
         >
           {isSubmitting ? (

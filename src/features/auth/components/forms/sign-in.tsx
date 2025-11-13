@@ -128,6 +128,7 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
         <FieldGroup>
           <signInForm.AppForm>
             <signInForm.FormSubmitButton
+              customDisabled={isOAuthPending}
               submittingText="Signing in..."
               text="Sign In"
             />

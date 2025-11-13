@@ -15,6 +15,7 @@ import { serverEnvironmentVariables } from "@/lib/env/server";
 import { SUPPORT_EMAIL } from "@/features/emails/constants";
 import { sendEmail } from "@/features/emails/send";
 import { database } from "@/database/connection";
+import { kv } from "@/lib/kv";
 
 const haveIBeenPwnedPlugin = haveIBeenPwned({
   customPasswordCompromisedMessage:
@@ -60,6 +61,20 @@ const auth = betterAuth({
     sendOnSignUp: true,
     sendOnSignIn: true,
   },
+  secondaryStorage: {
+    set: async (key, value, ttl) => {
+      // TTL in seconds, compatible with Upstash Redis
+      // https://upstash.com/docs/redis/sdks/ts/commands/string/set#param-ex
+      await (ttl ? kv.set(key, value, { ex: ttl }) : kv.set(key, value));
+    },
+    get: async (key) => {
+      const value = await kv.get(key);
+      return value;
+    },
+    delete: async (key) => {
+      await kv.del(key);
+    },
+  },
   socialProviders: {
     github: {
       clientSecret: serverEnvironmentVariables.GITHUB_CLIENT_SECRET,
@@ -86,6 +101,9 @@ const auth = betterAuth({
   },
   secret: serverEnvironmentVariables.BETTER_AUTH_SECRET,
   baseURL: serverEnvironmentVariables.BETTER_AUTH_URL,
+  rateLimit: {
+    storage: "secondary-storage",
+  },
   plugins: [haveIBeenPwnedPlugin, nextCookies()], // make sure that nextCookies is the last plugin in the array
 });
 

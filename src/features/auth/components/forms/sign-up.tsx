@@ -154,14 +154,14 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
                 </Button>
               )}
             </signUpForm.Subscribe>
-            <Field>
-              <FieldDescription className="px-6 text-center">
-                <span>Already have an account?</span>{" "}
-                <Link href="/sign-in">Sign in</Link>
-              </FieldDescription>
-            </Field>
           </FieldGroup>
         </Activity>
+        <Field>
+          <FieldDescription className="px-6 text-center">
+            <span>Already have an account?</span>{" "}
+            <Link href="/sign-in">Sign in</Link>
+          </FieldDescription>
+        </Field>
       </FieldSet>
     </form>
   );

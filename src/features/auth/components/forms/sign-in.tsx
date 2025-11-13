@@ -7,10 +7,12 @@ import Link from "next/link";
 
 import {
   FieldDescription,
+  FieldSeparator,
   FieldGroup,
   FieldSet,
   Field,
 } from "@/components/ui/field";
+import { ContinueWithGithub } from "@/features/auth/components/oauth/continue-with-github";
 import { passwordValidator, emailValidator } from "@/features/auth/validators";
 import { useAppForm } from "@/components/form/hook";
 import { authClient } from "@/features/auth/client";
@@ -58,6 +60,17 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
   return (
     <form {...properties} onSubmit={(event) => void handleSubmit(event)}>
       <FieldSet>
+        <FieldGroup>
+          <Field>
+            <ContinueWithGithub
+              showServerError={showServerError}
+              disabled={isSubmitting}
+            />
+          </Field>
+        </FieldGroup>
+        <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
+          Or continue with
+        </FieldSeparator>
         <FieldGroup>
           <signInForm.AppField
             children={(field) => (

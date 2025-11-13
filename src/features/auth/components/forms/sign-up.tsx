@@ -5,13 +5,15 @@ import { useStore } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import { PasswordConfirmFieldGroup } from "@/features/auth/components/password-confirm-field-group";
 import {
   FieldDescription,
+  FieldSeparator,
   FieldGroup,
   FieldSet,
   Field,
 } from "@/components/ui/field";
+import { PasswordConfirmFieldGroup } from "@/features/auth/components/password-confirm-field-group";
+import { ContinueWithGithub } from "@/features/auth/components/oauth/continue-with-github";
 import { emailValidator, nameValidator } from "@/features/auth/validators";
 import { useAppForm } from "@/components/form/hook";
 import { authClient } from "@/features/auth/client";
@@ -57,6 +59,17 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
   return (
     <form {...properties} onSubmit={(event) => void handleSubmit(event)}>
       <FieldSet>
+        <FieldGroup>
+          <Field>
+            <ContinueWithGithub
+              showServerError={showServerError}
+              disabled={isSubmitting}
+            />
+          </Field>
+        </FieldGroup>
+        <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
+          Or continue with
+        </FieldSeparator>
         <FieldGroup>
           <signUpForm.AppField
             children={(field) => (

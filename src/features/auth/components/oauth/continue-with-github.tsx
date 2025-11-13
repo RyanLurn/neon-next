@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import type { Route } from "next";
 
 import { GitHubLogo } from "@/features/auth/components/oauth/logos/github";
 import { authClient } from "@/features/auth/client";
@@ -15,6 +16,7 @@ function ContinueWithGithub({
 }: ContinueWithGithubProperties) {
   async function handleClick() {
     const { error } = await authClient.signIn.social({
+      callbackURL: "/protected" as Route,
       provider: "github",
     });
 
@@ -28,6 +30,7 @@ function ContinueWithGithub({
       variant={variant}
       {...properties}
       onClick={() => void handleClick()}
+      type="button"
     >
       <GitHubLogo />
       <span>Continue with GitHub</span>

@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import type { ZodValidationError, OAuthError } from "@/types/errors";
@@ -25,7 +25,7 @@ export default async function OAuthErrorPage({
 
     console.warn(zodValidationError);
 
-    notFound();
+    redirect("/sign-in");
   }
 
   const oauthError: OAuthError = {

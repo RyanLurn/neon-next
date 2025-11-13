@@ -1,6 +1,6 @@
-import type { ComponentProps, FormEvent } from "react";
 import type { Route } from "next";
 
+import { type ComponentProps, type FormEvent, useState } from "react";
 import { useStore } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -23,6 +23,8 @@ interface SignInFormProperties extends ComponentProps<"form"> {
 
 function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
   const router = useRouter();
+  const [isOAuthPending, setIsOAuthPending] = useState(false);
+
   const signInForm = useAppForm({
     onSubmit: async ({ value }) => {
       const { error } = await authClient.signIn.email({
@@ -47,10 +49,19 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
       email: "",
     },
   });
+
   const isSubmitting = useStore(
     signInForm.store,
     (state) => state.isSubmitting
   );
+
+  function startOAuth() {
+    setIsOAuthPending(true);
+  }
+
+  function finishOAuth() {
+    setIsOAuthPending(false);
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,7 +73,10 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
       <FieldSet>
         <OAuthOptions
           showServerError={showServerError}
+          isOAuthPending={isOAuthPending}
           isSubmitting={isSubmitting}
+          finishOAuth={finishOAuth}
+          startOAuth={startOAuth}
         />
         <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
           Or continue with

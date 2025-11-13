@@ -13,9 +13,8 @@ import {
   Field,
 } from "@/components/ui/field";
 import { PasswordConfirmFieldGroup } from "@/features/auth/components/password-confirm-field-group";
-import { ContinueWithGithub } from "@/features/auth/components/oauth/continue-with-github";
-import { ContinueWithGoogle } from "@/features/auth/components/oauth/continue-with-google";
 import { emailValidator, nameValidator } from "@/features/auth/validators";
+import { OAuthOptions } from "@/features/auth/components/oauth/options";
 import { useAppForm } from "@/components/form/hook";
 import { authClient } from "@/features/auth/client";
 
@@ -60,20 +59,10 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
   return (
     <form {...properties} onSubmit={(event) => void handleSubmit(event)}>
       <FieldSet>
-        <FieldGroup>
-          <Field>
-            <ContinueWithGoogle
-              showServerError={showServerError}
-              disabled={isSubmitting}
-            />
-          </Field>
-          <Field>
-            <ContinueWithGithub
-              showServerError={showServerError}
-              disabled={isSubmitting}
-            />
-          </Field>
-        </FieldGroup>
+        <OAuthOptions
+          showServerError={showServerError}
+          isSubmitting={isSubmitting}
+        />
         <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
           Or continue with
         </FieldSeparator>

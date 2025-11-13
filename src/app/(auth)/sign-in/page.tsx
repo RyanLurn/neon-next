@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 
-import {
-  CardDescription,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Card,
-} from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle, Card } from "@/components/ui/card";
 import { SignInForm } from "@/features/auth/components/forms/sign-in";
 import { ErrorAlert } from "@/components/utilities/error-alert";
 
@@ -29,10 +23,7 @@ export default function SignInPage() {
     <div className="flex size-full items-center justify-center p-6 md:p-10">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Sign In</CardTitle>
-          <CardDescription>
-            Enter your credentials below to sign in
-          </CardDescription>
+          <CardTitle className="text-center">Sign In</CardTitle>
         </CardHeader>
         <CardContent>
           {serverError && (

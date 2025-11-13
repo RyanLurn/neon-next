@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 
-import {
-  CardDescription,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Card,
-} from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle, Card } from "@/components/ui/card";
 import { SignUpForm } from "@/features/auth/components/forms/sign-up";
 import { ErrorAlert } from "@/components/utilities/error-alert";
 
@@ -28,11 +22,8 @@ export default function SignUpPage() {
   return (
     <div className="flex size-full items-center justify-center p-6 md:p-10">
       <Card className="w-full max-w-sm">
-        <CardHeader>
+        <CardHeader className="text-center">
           <CardTitle>Create an account</CardTitle>
-          <CardDescription>
-            Enter your information below to sign up
-          </CardDescription>
         </CardHeader>
         <CardContent>
           {serverError && (

@@ -173,7 +173,16 @@ function SignUpForm({
         <Field>
           <FieldDescription className="px-6 text-center">
             <span>Already have an account?</span>{" "}
-            <Link href="/sign-in">Sign in</Link>
+            <Link
+              onNavigate={(event) => {
+                if (isSubmitting || isOAuthPending) {
+                  event.preventDefault();
+                }
+              }}
+              href="/sign-in"
+            >
+              Sign in
+            </Link>
           </FieldDescription>
         </Field>
       </FieldSet>

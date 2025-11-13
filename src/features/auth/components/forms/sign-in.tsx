@@ -130,7 +130,16 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
           <Field>
             <FieldDescription className="px-6 text-center">
               <span>Don't have an account?</span>{" "}
-              <Link href="/sign-up">Sign up</Link>
+              <Link
+                onNavigate={(event) => {
+                  if (isSubmitting || isOAuthPending) {
+                    event.preventDefault();
+                  }
+                }}
+                href="/sign-up"
+              >
+                Sign up
+              </Link>
             </FieldDescription>
           </Field>
         </FieldGroup>

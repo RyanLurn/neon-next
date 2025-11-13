@@ -85,8 +85,8 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
           <signInForm.AppField
             children={(field) => (
               <field.FormTextInputField
+                disabled={isSubmitting || isOAuthPending}
                 placeholder="example@gmail.com"
-                disabled={isSubmitting}
                 label="Email"
                 type="email"
                 required
@@ -100,7 +100,7 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
           <signInForm.AppField
             children={(field) => (
               <field.FormTextInputField
-                disabled={isSubmitting}
+                disabled={isSubmitting || isOAuthPending}
                 label="Password"
                 type="password"
                 required
@@ -113,6 +113,11 @@ function SignInForm({ showServerError, ...properties }: SignInFormProperties) {
           />
           <Field>
             <Link
+              onNavigate={(event) => {
+                if (isSubmitting || isOAuthPending) {
+                  event.preventDefault();
+                }
+              }}
               className="text-sm underline-offset-4 hover:underline"
               href="/forgot-password"
             >

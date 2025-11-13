@@ -32,8 +32,9 @@ function OAuthButton({
 
     if (error) {
       showServerError(error.message ?? "Something went wrong.");
-      finishOAuth();
     }
+
+    finishOAuth();
   }
   return (
     <Button

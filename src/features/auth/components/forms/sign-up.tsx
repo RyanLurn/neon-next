@@ -1,6 +1,6 @@
 import type { Route } from "next";
 
-import { type ComponentProps, type FormEvent, Activity, useState } from "react";
+import { type ComponentProps, type FormEvent, Activity } from "react";
 import { useStore } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -23,12 +23,19 @@ import { Button } from "@/components/ui/button";
 
 interface SignUpFormProperties extends ComponentProps<"form"> {
   showServerError: (errorMessage: string) => void;
+  showSocialButtons: () => void;
+  showEmailForm: () => void;
+  view: "social" | "email";
 }
 
-function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
+function SignUpForm({
+  showSocialButtons,
+  showServerError,
+  showEmailForm,
+  view,
+  ...properties
+}: SignUpFormProperties) {
   const router = useRouter();
-
-  const [view, setView] = useState<"social" | "email">("social");
 
   const signUpForm = useAppForm({
     onSubmit: async ({ value }) => {
@@ -57,14 +64,6 @@ function SignUpForm({ showServerError, ...properties }: SignUpFormProperties) {
     signUpForm.store,
     (state) => state.isSubmitting
   );
-
-  function showSocialButtons() {
-    setView("social");
-  }
-
-  function showEmailForm() {
-    setView("email");
-  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
